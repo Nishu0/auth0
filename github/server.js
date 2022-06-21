@@ -1,4 +1,4 @@
-/*  EXPRESS */
+
 const express = require('express');
 const app = express();
 
@@ -13,21 +13,15 @@ const PORT = process.env.PORT || 5000;
 
 
 const axios = require('axios')
-// This is the client ID and client secret that you obtained
-// while registering on github app
 const clientID = '##########'
 const clientSecret = '#########'
 
-// Declare the callback route
-app.get('/github/callback', (req, res) => {
 
-  // The req.query object has the query params that were sent to this route.
+app.get('/github/callback', (req, res) => {
   const requestToken = req.query.code
-  
   axios({
     method: 'post',
     url: `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`,
-    // Set the content type header, so that we get the response in JSON
     headers: {
          accept: 'application/json'
     }
